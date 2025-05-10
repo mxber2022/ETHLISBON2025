@@ -4,7 +4,20 @@ version: 0.1.0
 description: An agent that fetches and shares motivational quotes.
 license: Apache-2.0
 aea_version: '>=1.0.0, <2.0.0'
-fingerprint: {}
+fingerprint:
+  abci/README.md: bafybeia5y34dgznojhabsw7js2auxzmwxoubs2yacvscvoqkmt323d3npq
+  abci/__init__.py: bafybeicitj573a2sv6dezytno65dxpmhhirwm2jo2vysqj6uui4un7qiti
+  abci/abci.proto: bafybeid2kv4fy6xx453apqxashnqfjymhbrvtxj3uq2vdtqr45lvlfjzm4
+  abci/abci_pb2.py: bafybeiamdsjnddab32gu3xxa2tj4hkuaor2aboqem5dpt4ug25hhejp2li
+  abci/custom_types.py: bafybeihpkluue4c7cunrcaxze3pqexhmwxkybrv4c3bzmkkakze7n6v44a
+  abci/dialogues.py: bafybeic4f4vkk7oyaohabshumvca54bqoockfgx3z7cstjk3ubviosk5mm
+  abci/message.py: bafybeiegfbh4cslzrqitmqjd437m7wzegez7i5ysmka5ym3icbl4zvgn5y
+  abci/serialization.py: bafybeigfsa443dvev6sgcf447ppmqlpkjsd3shwho6mqusvs6bfkt3chsy
+  abci/tests/__init__.py: bafybeie4cd5xo7o4teyfjclaju3zoguuahjvkpsbshda3x23jcph53fdpi
+  abci/tests/conftest.py: bafybeidomydt6bdji22rndrdb5w773vvdja55o5m5n4pbfslx7ey5euot4
+  abci/tests/test_abci.py: bafybeig4gex7e62uxca7riaetmr2pu5xekxg3d7xjvck72zjd3uxny4v64
+  abci/tests/test_abci_dialogues.py: bafybeiby6ahpj6dnvjagnyyew3hgncstay37tt3xqu5x2c2yx3nldwvzzi
+  abci/tests/test_abci_messages.py: bafybeidbec7g3gvyr4jon57m6pfcobslj3nvnnynzeib3mgvm46d3ywdgi
 fingerprint_ignore_patterns: []
 private_key_paths: {}
 contracts: []
