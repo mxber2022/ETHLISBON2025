@@ -1,5 +1,7 @@
 {
-    "dev": {},
+    "dev": {
+        "skill/elia/your_fsm_app_abci/0.1.0": "bafybeiav2bmxx32yreelqjm5fhliq5jkorvsz73ekskgjzfuqh66kokuz4"
+    },
     "third_party": {
         "protocol/open_aea/signing/1.0.0": "bafybeihv62fim3wl2bayavfcg3u5e5cxu3b7brtu4cn5xoxd6lqwachasi",
         "protocol/valory/abci/0.1.0": "bafybeiatodhboj6a3p35x4f4b342lzk6ckxpud23awnqbxwjeon3k5y36u",
