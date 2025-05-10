@@ -75,6 +75,22 @@ models:
     class_name: LedgerApiDialogues
   params:
     args:
+      quote_api_url: ${QUOTE_API_URL:str:"https://quotes.rest/qod?category=inspire"}
+      wait_time_in_seconds: ${WAIT_TIME:int:86400}
+      service_registry_address: ${SERVICE_REGISTRY_ADDRESS:str:null}
+      share_tm_config_on_startup: ${SHARE_TM_CONFIG_ON_STARTUP:bool:false}
+      on_chain_service_id: ${ON_CHAIN_SERVICE_ID:int:null}
+      use_termination: ${USE_TERMINATION:bool:false}
+      use_slashing: ${USE_SLASHING:bool:false}
+      slash_cooldown_hours: ${SLASH_COOLDOWN_HOURS:int:0}
+      slash_threshold_amount: ${SLASH_THRESHOLD_AMOUNT:int:0}
+      light_slash_unit_amount: ${LIGHT_SLASH_UNIT_AMOUNT:int:0}
+      serious_slash_unit_amount: ${SERIOUS_SLASH_UNIT_AMOUNT:int:0}
+      setup:
+        all_participants:
+        - '0x0000000000000000000000000000000000000000'
+        consensus_threshold: ${CONSENSUS_THRESHOLD:int:3}
+        safe_contract_address: ${SAFE_CONTRACT_ADDRESS:str:"0x0000000000000000000000000000000000000000"}
       cleanup_history_depth: 1
       cleanup_history_depth_current: null
       drand_public_key: 868f005eb8e6e4ca0a47c8a77ceaa5309a47978a7c71bc5cce96366b5d7a569937c529eeda66c7293784a9402801af31
@@ -102,7 +118,6 @@ models:
       keeper_timeout: 30.0
       max_attempts: 10
       max_healthcheck: 120
-      on_chain_service_id: null
       request_retry_delay: 1.0
       request_timeout: 10.0
       reset_pause_duration: 10
@@ -111,13 +126,6 @@ models:
       retry_timeout: 3
       round_timeout_seconds: 30.0
       service_id: motivational_quote
-      service_registry_address: null
-      setup:
-        all_participants:
-        - '0x0000000000000000000000000000000000000000'
-        consensus_threshold: null
-        safe_contract_address: '0x0000000000000000000000000000000000000000'
-      share_tm_config_on_startup: false
       sleep_time: 1
       tendermint_check_sleep_delay: 3
       tendermint_com_url: http://localhost:8080

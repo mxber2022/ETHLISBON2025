@@ -1,9 +1,9 @@
 {
     "dev": {
         "protocol/valory/acn/1.0.0": "bafybeidluaoeakae3exseupaea4i3yvvk5vivyt227xshjlffywwxzcxqe",
-        "skill/elia/your_fsm_app_abci/0.1.0": "bafybeianncwuz3gbp2k3aqzpabfhg6adnjkoaetscz53csb5gfbp3cp4aq",
-        "agent/elia/your_agent/0.1.0": "bafybeicllzt4vuhks4v4lnwhuee3pi26mjjy5baxmr273mdjsa34dqozje",
-        "service/elia/your_service/0.1.0": "bafybeids3kptmnhymd4f6p6o26nwy6223caajor47thhl2l6jhiqnum3o4"
+        "skill/elia/your_fsm_app_abci/0.1.0": "bafybeiehu5piq3x7jlsymprozwu6prg6jumadljvtiohjdbjcn2q4i72dy",
+        "agent/elia/your_agent/0.1.0": "bafybeiagumr3jtcivtfcufkt5m4yx6vubyuwo573h7oqnmzcknbbozglre",
+        "service/elia/your_service/0.1.0": "bafybeihhsrbgct7sbrvqn3vfsiqg3wirtgzcdompxirvdopftdtblxnpsa"
     },
     "third_party": {
         "protocol/open_aea/signing/1.0.0": "bafybeihv62fim3wl2bayavfcg3u5e5cxu3b7brtu4cn5xoxd6lqwachasi",
