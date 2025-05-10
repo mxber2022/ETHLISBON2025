@@ -1,24 +1,10 @@
 # -*- coding: utf-8 -*-
 # ------------------------------------------------------------------------------
-#
-#   Copyright 2025 Valory AG
-#
-#   Licensed under the Apache License, Version 2.0 (the "License");
-#   you may not use this file except in compliance with the License.
-#   You may obtain a copy of the License at
-#
-#       http://www.apache.org/licenses/LICENSE-2.0
-#
-#   Unless required by applicable law or agreed to in writing, software
-#   distributed under the License is distributed on an "AS IS" BASIS,
-#   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-#   See the License for the specific language governing permissions and
-#   limitations under the License.
-#
+#   Behaviours for MotivationalQuoteAbciApp
 # ------------------------------------------------------------------------------
 
-"""This package contains round behaviours of MotivationalQuoteAbciApp."""
-
+import requests
+import time
 from abc import ABC
 from typing import Generator, Set, Type, cast
 
@@ -27,9 +13,8 @@ from packages.valory.skills.abstract_round_abci.behaviours import (
     AbstractRoundBehaviour,
     BaseBehaviour,
 )
-
 from packages.elia.skills.your_fsm_app_abci.models import Params
-from packages.elia.skills.your_fsm_app_abci.rounds import (
+from packages.elia.skills.your_fsm_app_abci.models import (
     SynchronizedData,
     MotivationalQuoteAbciApp,
     CollectQuoteRound,
@@ -37,7 +22,7 @@ from packages.elia.skills.your_fsm_app_abci.rounds import (
     SubmitQuoteRound,
     WaitForNextCycleRound,
 )
-from packages.elia.skills.your_fsm_app_abci.rounds import (
+from packages.elia.skills.your_fsm_app_abci.models import (
     CollectQuotePayload,
     FetchQuotePayload,
     SubmitQuotePayload,
@@ -46,31 +31,36 @@ from packages.elia.skills.your_fsm_app_abci.rounds import (
 
 
 class MotivationalQuoteBaseBehaviour(BaseBehaviour, ABC):
-    """Base behaviour for the your_fsm_app_abci skill."""
+    """Base behaviour for the motivational_quote_abci skill."""
 
     @property
     def synchronized_data(self) -> SynchronizedData:
-        """Return the synchronized data."""
         return cast(SynchronizedData, super().synchronized_data)
 
     @property
     def params(self) -> Params:
-        """Return the params."""
         return cast(Params, super().params)
 
 
-class CollectQuoteBehaviour(MotivationalQuoteBaseBehaviour):
-    """CollectQuoteBehaviour"""
+class FetchQuoteBehaviour(MotivationalQuoteBaseBehaviour):
+    """FetchQuoteBehaviour"""
 
-    matching_round: Type[AbstractRound] = CollectQuoteRound
+    matching_round: Type[AbstractRound] = FetchQuoteRound
 
-    # TODO: implement logic required to set payload content for synchronization
     def async_act(self) -> Generator:
-        """Do the act, supporting asynchronous execution."""
+        """Perform fetching quote and send payload."""
 
         with self.context.benchmark_tool.measure(self.behaviour_id).local():
             sender = self.context.agent_address
-            payload = CollectQuotePayload(sender=sender, content=...)
+            try:
+                response = requests.get("https://quotes.rest/qod?category=inspire")
+                response.raise_for_status()
+                quote = response.json()["contents"]["quotes"][0]["quote"]
+            except Exception as e:
+                self.context.logger.error(f"Failed to fetch quote: {e}")
+                quote = "Keep pushing forward!"
+
+            payload = FetchQuotePayload(sender=sender, content=quote)
 
         with self.context.benchmark_tool.measure(self.behaviour_id).consensus():
             yield from self.send_a2a_transaction(payload)
@@ -79,18 +69,18 @@ class CollectQuoteBehaviour(MotivationalQuoteBaseBehaviour):
         self.set_done()
 
 
-class FetchQuoteBehaviour(MotivationalQuoteBaseBehaviour):
-    """FetchQuoteBehaviour"""
+class CollectQuoteBehaviour(MotivationalQuoteBaseBehaviour):
+    """CollectQuoteBehaviour"""
 
-    matching_round: Type[AbstractRound] = FetchQuoteRound
+    matching_round: Type[AbstractRound] = CollectQuoteRound
 
-    # TODO: implement logic required to set payload content for synchronization
     def async_act(self) -> Generator:
-        """Do the act, supporting asynchronous execution."""
+        """Perform consensus on the fetched quote."""
 
         with self.context.benchmark_tool.measure(self.behaviour_id).local():
             sender = self.context.agent_address
-            payload = FetchQuotePayload(sender=sender, content=...)
+            quote = self.synchronized_data.most_voted_quote
+            payload = CollectQuotePayload(sender=sender, content=quote)
 
         with self.context.benchmark_tool.measure(self.behaviour_id).consensus():
             yield from self.send_a2a_transaction(payload)
@@ -104,13 +94,13 @@ class SubmitQuoteBehaviour(MotivationalQuoteBaseBehaviour):
 
     matching_round: Type[AbstractRound] = SubmitQuoteRound
 
-    # TODO: implement logic required to set payload content for synchronization
     def async_act(self) -> Generator:
-        """Do the act, supporting asynchronous execution."""
+        """Perform submission of the agreed quote."""
 
         with self.context.benchmark_tool.measure(self.behaviour_id).local():
             sender = self.context.agent_address
-            payload = SubmitQuotePayload(sender=sender, content=...)
+            quote = self.synchronized_data.agreed_quote
+            payload = SubmitQuotePayload(sender=sender, content=quote)
 
         with self.context.benchmark_tool.measure(self.behaviour_id).consensus():
             yield from self.send_a2a_transaction(payload)
@@ -124,13 +114,15 @@ class WaitForNextCycleBehaviour(MotivationalQuoteBaseBehaviour):
 
     matching_round: Type[AbstractRound] = WaitForNextCycleRound
 
-    # TODO: implement logic required to set payload content for synchronization
     def async_act(self) -> Generator:
-        """Do the act, supporting asynchronous execution."""
+        """Wait for the next cycle."""
 
         with self.context.benchmark_tool.measure(self.behaviour_id).local():
             sender = self.context.agent_address
-            payload = WaitForNextCyclePayload(sender=sender, content=...)
+            wait_time = self.params.wait_time_in_seconds
+            self.context.logger.info(f"Waiting {wait_time} seconds for next cycle.")
+            time.sleep(wait_time)
+            payload = WaitForNextCyclePayload(sender=sender, content="")
 
         with self.context.benchmark_tool.measure(self.behaviour_id).consensus():
             yield from self.send_a2a_transaction(payload)
@@ -140,13 +132,13 @@ class WaitForNextCycleBehaviour(MotivationalQuoteBaseBehaviour):
 
 
 class MotivationalQuoteRoundBehaviour(AbstractRoundBehaviour):
-    """MotivationalQuoteRoundBehaviour"""
+    """Wraps all round behaviours."""
 
     initial_behaviour_cls = FetchQuoteBehaviour
     abci_app_cls = MotivationalQuoteAbciApp  # type: ignore
-    behaviours: Set[Type[BaseBehaviour]] = [
+    behaviours: Set[Type[BaseBehaviour]] = {
         CollectQuoteBehaviour,
         FetchQuoteBehaviour,
         SubmitQuoteBehaviour,
-        WaitForNextCycleBehaviour
-    ]
+        WaitForNextCycleBehaviour,
+    }
