@@ -1,6 +1,8 @@
 {
     "dev": {
-        "skill/elia/your_fsm_app_abci/0.1.0": "bafybeiav2bmxx32yreelqjm5fhliq5jkorvsz73ekskgjzfuqh66kokuz4"
+        "protocol/valory/acn/1.0.0": "bafybeidluaoeakae3exseupaea4i3yvvk5vivyt227xshjlffywwxzcxqe",
+        "skill/elia/your_fsm_app_abci/0.1.0": "bafybeianncwuz3gbp2k3aqzpabfhg6adnjkoaetscz53csb5gfbp3cp4aq",
+        "agent/elia/your_agent/0.1.0": "bafybeif6lszkuk5ndercw7bzqdzw4bfzp4l7sxizqpsvuextjzo5kdd5uq"
     },
     "third_party": {
         "protocol/open_aea/signing/1.0.0": "bafybeihv62fim3wl2bayavfcg3u5e5cxu3b7brtu4cn5xoxd6lqwachasi",
