@@ -1,0 +1,21 @@
+alphabet_in:
+  - DONE
+  - NO_MAJORITY
+  - ROUND_TIMEOUT
+default_start_state: FetchQuoteRound
+final_states: []
+label: MotivationalQuoteAbciApp
+start_states:
+  - FetchQuoteRound
+states:
+  - FetchQuoteRound
+  - CollectQuoteRound
+  - SubmitQuoteRound
+  - WaitForNextCycleRound
+transition_func:
+  (FetchQuoteRound, DONE): CollectQuoteRound
+  (FetchQuoteRound, ROUND_TIMEOUT): FetchQuoteRound
+  (CollectQuoteRound, DONE): SubmitQuoteRound
+  (CollectQuoteRound, NO_MAJORITY): FetchQuoteRound
+  (SubmitQuoteRound, DONE): WaitForNextCycleRound
+  (WaitForNextCycleRound, DONE): FetchQuoteRound
