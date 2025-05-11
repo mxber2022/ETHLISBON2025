@@ -3,7 +3,7 @@ author: elia
 version: 0.1.0
 description: An agent that fetches and shares motivational quotes.
 license: Apache-2.0
-aea_version: '>=1.0.0, <2.0.0'
+aea_version: ">=1.0.0, <2.0.0"
 fingerprint:
   abci/README.md: bafybeia5y34dgznojhabsw7js2auxzmwxoubs2yacvscvoqkmt323d3npq
   abci/__init__.py: bafybeicitj573a2sv6dezytno65dxpmhhirwm2jo2vysqj6uui4un7qiti
@@ -22,31 +22,31 @@ fingerprint_ignore_patterns: []
 private_key_paths: {}
 contracts: []
 connections:
-- valory/abci:0.1.0:bafybeib5wliqsotle6onwaz63umadnu7lyjeyr2lz6xau2kcq6eirfnh7m
-- valory/p2p_libp2p_client:0.1.0:bafybeihs5zlwa5wlozct3rjlxsirm3ve3e4buse5nfehiky6ymnnfrobne
-- valory/ipfs:0.1.0:bafybeibpcwc673evkpliwp35hmjwjx7obramg2chxityubevnhss3f5cfa
-- valory/ledger:0.19.0:bafybeigntoericenpzvwejqfuc3kqzo2pscs76qoygg5dbj6f4zxusru5e
+  - valory/abci:0.1.0:bafybeib5wliqsotle6onwaz63umadnu7lyjeyr2lz6xau2kcq6eirfnh7m
+  - valory/p2p_libp2p_client:0.1.0:bafybeihs5zlwa5wlozct3rjlxsirm3ve3e4buse5nfehiky6ymnnfrobne
+  - valory/ipfs:0.1.0:bafybeibpcwc673evkpliwp35hmjwjx7obramg2chxityubevnhss3f5cfa
+  - valory/ledger:0.19.0:bafybeigntoericenpzvwejqfuc3kqzo2pscs76qoygg5dbj6f4zxusru5e
 protocols:
-- open_aea/signing:1.0.0:bafybeihv62fim3wl2bayavfcg3u5e5cxu3b7brtu4cn5xoxd6lqwachasi
-- valory/abci:0.1.0:bafybeiatodhboj6a3p35x4f4b342lzk6ckxpud23awnqbxwjeon3k5y36u
-- valory/acn:1.0.0:bafybeidluaoeakae3exseupaea4i3yvvk5vivyt227xshjlffywwxzcxqe
-- valory/ipfs:0.1.0:bafybeifi2nri7sprmkez4rqzwb4lnu6peoy3bax5k6asf6k5ms7kmjpmkq
-- valory/http:1.0.0:bafybeifugzl63kfdmwrxwphrnrhj7bn6iruxieme3a4ntzejf6kmtuwmae
+  - open_aea/signing:1.0.0:bafybeihv62fim3wl2bayavfcg3u5e5cxu3b7brtu4cn5xoxd6lqwachasi
+  - valory/abci:0.1.0:bafybeiatodhboj6a3p35x4f4b342lzk6ckxpud23awnqbxwjeon3k5y36u
+  - valory/acn:1.0.0:bafybeidluaoeakae3exseupaea4i3yvvk5vivyt227xshjlffywwxzcxqe
+  - valory/ipfs:0.1.0:bafybeifi2nri7sprmkez4rqzwb4lnu6peoy3bax5k6asf6k5ms7kmjpmkq
+  - valory/http:1.0.0:bafybeifugzl63kfdmwrxwphrnrhj7bn6iruxieme3a4ntzejf6kmtuwmae
 skills:
-- elia/your_fsm_app_abci:0.1.0:bafybeiehu5piq3x7jlsymprozwu6prg6jumadljvtiohjdbjcn2q4i72dy
-- valory/abstract_abci:0.1.0:bafybeigygqg63cr4sboxz7xfakcfpz55id7ihmj434v5iz3r26t7q6qwie
-- valory/abstract_round_abci:0.1.0:bafybeihyaubqrndsjkrplx4e2tn45jgddt52cxzuhb5iwiznz7qlhrbdbe
-- valory/termination_abci:0.1.0:bafybeifs4vorsmsulzgobr754od2omj6uphylslkrtuadxzludoexld6ny
+  - elia/your_fsm_app_abci:0.1.0:bafybeiehu5piq3x7jlsymprozwu6prg6jumadljvtiohjdbjcn2q4i72dy
+  - valory/abstract_abci:0.1.0:bafybeigygqg63cr4sboxz7xfakcfpz55id7ihmj434v5iz3r26t7q6qwie
+  - valory/abstract_round_abci:0.1.0:bafybeihyaubqrndsjkrplx4e2tn45jgddt52cxzuhb5iwiznz7qlhrbdbe
+  - valory/termination_abci:0.1.0:bafybeifs4vorsmsulzgobr754od2omj6uphylslkrtuadxzludoexld6ny
 default_ledger: ethereum
 required_ledgers:
-- ethereum
+  - ethereum
 default_connection: valory/abci:0.1.0
 logging_config:
   version: 1
   disable_existing_loggers: false
   formatters:
     standard:
-      format: '[%(asctime)s] [%(levelname)s] %(message)s'
+      format: "[%(asctime)s] [%(levelname)s] %(message)s"
   handlers:
     console:
       class: logging.StreamHandler
@@ -55,7 +55,7 @@ logging_config:
   loggers:
     aea:
       handlers:
-      - console
+        - console
       propagate: true
 dependencies:
   open-aea-ledger-ethereum:
@@ -81,7 +81,7 @@ models:
       serious_slash_unit_amount: ${SERIOUS_SLASH_UNIT_AMOUNT:int:0}
       setup:
         all_participants:
-        - '0x0000000000000000000000000000000000000000'
+          - "0x0000000000000000000000000000000000000000"
         consensus_threshold: ${CONSENSUS_THRESHOLD:int:3}
         safe_contract_address: ${SAFE_CONTRACT_ADDRESS:str:"0x0000000000000000000000000000000000000000"}
 ---
